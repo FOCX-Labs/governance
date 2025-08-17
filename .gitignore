@@ -1,0 +1,16 @@
+.anchor
+.DS_Store
+**/*.rs.bk
+node_modules
+test-ledger
+.yarn
+keys/
+.augment-guidelines
+
+.env
+
+target
+!target/idl/
+!target/idl/**
+!target/types/
+!target/types/**

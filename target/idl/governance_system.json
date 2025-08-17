@@ -1,0 +1,3061 @@
+{
+  "address": "9GqiBXHh7e5gREwHU6PKHDaQsLuYfqHQ2az2sBLXdaTv",
+  "metadata": {
+    "name": "governance_system",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "add_committee_member",
+      "docs": [
+        "Add committee member"
+      ],
+      "discriminator": [
+        78,
+        231,
+        152,
+        91,
+        24,
+        13,
+        255,
+        82
+      ],
+      "accounts": [
+        {
+          "name": "governance_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "docs": [
+            "Only administrator can add members"
+          ],
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "member",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "add_rule_document",
+      "docs": [
+        "Add rule document"
+      ],
+      "discriminator": [
+        34,
+        104,
+        133,
+        233,
+        0,
+        13,
+        70,
+        228
+      ],
+      "accounts": [
+        {
+          "name": "rule_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  117,
+                  108,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "governance_config",
+          "docs": [
+            "Governance configuration account for permission verification"
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "docs": [
+            "Only administrator can add rule documents"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "category",
+          "type": "string"
+        },
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "url",
+          "type": "string"
+        },
+        {
+          "name": "hash",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "cast_vote",
+      "docs": [
+        "Cast vote"
+      ],
+      "discriminator": [
+        20,
+        212,
+        15,
+        189,
+        69,
+        180,
+        69,
+        151
+      ],
+      "accounts": [
+        {
+          "name": "proposal",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  112,
+                  111,
+                  115,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "proposal_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "vote",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  111,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "proposal_id"
+              },
+              {
+                "kind": "account",
+                "path": "voter"
+              }
+            ]
+          }
+        },
+        {
+          "name": "governance_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "voter",
+          "docs": [
+            "Voter (must be committee member)"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "voter_token_account",
+          "docs": [
+            "Voter's token account"
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "voter"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  6,
+                  221,
+                  246,
+                  225,
+                  215,
+                  101,
+                  161,
+                  147,
+                  217,
+                  203,
+                  225,
+                  70,
+                  206,
+                  235,
+                  121,
+                  172,
+                  28,
+                  180,
+                  133,
+                  237,
+                  95,
+                  91,
+                  55,
+                  145,
+                  58,
+                  140,
+                  245,
+                  133,
+                  126,
+                  255,
+                  0,
+                  169
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "governance_config.committee_token_mint",
+                "account": "GovernanceConfig"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "committee_token_mint",
+          "docs": [
+            "Committee token mint"
+          ]
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "proposal_id",
+          "type": "u64"
+        },
+        {
+          "name": "vote_type",
+          "type": {
+            "defined": {
+              "name": "VoteType"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "close_governance_config",
+      "docs": [
+        "Close governance configuration"
+      ],
+      "discriminator": [
+        20,
+        131,
+        54,
+        71,
+        141,
+        77,
+        178,
+        161
+      ],
+      "accounts": [
+        {
+          "name": "governance_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "docs": [
+            "Only administrator can close configuration"
+          ],
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_vote",
+      "docs": [
+        "Close vote account"
+      ],
+      "discriminator": [
+        137,
+        152,
+        87,
+        249,
+        170,
+        239,
+        133,
+        59
+      ],
+      "accounts": [
+        {
+          "name": "vote",
+          "writable": true
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "governance_config",
+          "docs": [
+            "Governance config to verify authority"
+          ]
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "create_proposal",
+      "docs": [
+        "Create proposal"
+      ],
+      "discriminator": [
+        132,
+        116,
+        68,
+        174,
+        216,
+        160,
+        198,
+        22
+      ],
+      "accounts": [
+        {
+          "name": "proposal",
+          "writable": true
+        },
+        {
+          "name": "governance_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "proposer",
+          "docs": [
+            "Proposal proposer (any user can create proposals)"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "proposer_token_account",
+          "docs": [
+            "Proposer's USDC token account (for deposit)"
+          ],
+          "writable": true
+        },
+        {
+          "name": "governance_token_vault",
+          "docs": [
+            "Governance system token vault (for storing deposits)"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101,
+                  95,
+                  116,
+                  111,
+                  107,
+                  101,
+                  110,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "proposal_type",
+          "type": {
+            "defined": {
+              "name": "ProposalType"
+            }
+          }
+        },
+        {
+          "name": "execution_data",
+          "type": {
+            "option": {
+              "defined": {
+                "name": "ExecutionData"
+              }
+            }
+          }
+        },
+        {
+          "name": "custom_deposit_raw",
+          "type": {
+            "option": "u64"
+          }
+        }
+      ],
+      "returns": "u64"
+    },
+    {
+      "name": "create_rule_registry",
+      "docs": [
+        "Create rule registry"
+      ],
+      "discriminator": [
+        155,
+        35,
+        85,
+        101,
+        90,
+        225,
+        147,
+        156
+      ],
+      "accounts": [
+        {
+          "name": "rule_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  117,
+                  108,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "governance_config",
+          "docs": [
+            "Governance configuration account for permission verification"
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "docs": [
+            "Only administrator can create rule registry"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "execute_proposal",
+      "docs": [
+        "Execute proposal (simplified version)"
+      ],
+      "discriminator": [
+        186,
+        60,
+        116,
+        133,
+        108,
+        128,
+        111,
+        28
+      ],
+      "accounts": [
+        {
+          "name": "proposal",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  112,
+                  111,
+                  115,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "proposal_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "governance_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "proposal_id",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "finalize_proposal",
+      "docs": [
+        "Finalize proposal"
+      ],
+      "discriminator": [
+        23,
+        68,
+        51,
+        167,
+        109,
+        173,
+        187,
+        164
+      ],
+      "accounts": [
+        {
+          "name": "proposal",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  112,
+                  111,
+                  115,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "proposal_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "governance_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "committee_token_mint",
+          "docs": [
+            "Committee token mint (for calculating voting power)"
+          ]
+        },
+        {
+          "name": "proposer_token_account",
+          "docs": [
+            "Proposer's token account (for deposit refund)"
+          ],
+          "writable": true
+        },
+        {
+          "name": "governance_token_vault",
+          "docs": [
+            "Governance system token account (for deposit handling)"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101,
+                  95,
+                  116,
+                  111,
+                  107,
+                  101,
+                  110,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "governance_authority",
+          "docs": [
+            "Governance system authority (for signing transfers)"
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "token_program",
+          "docs": [
+            "Token program (for deposit transfers)"
+          ],
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "proposal_id",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "find_documents_by_category",
+      "docs": [
+        "Find rule documents by category"
+      ],
+      "discriminator": [
+        183,
+        25,
+        110,
+        193,
+        90,
+        112,
+        43,
+        169
+      ],
+      "accounts": [
+        {
+          "name": "rule_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  117,
+                  108,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "category",
+          "type": "string"
+        }
+      ],
+      "returns": {
+        "vec": {
+          "defined": {
+            "name": "RuleDocument"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_rule_documents",
+      "docs": [
+        "Get rule documents information"
+      ],
+      "discriminator": [
+        152,
+        87,
+        152,
+        51,
+        233,
+        216,
+        149,
+        238
+      ],
+      "accounts": [
+        {
+          "name": "rule_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  117,
+                  108,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "args": [],
+      "returns": {
+        "vec": {
+          "defined": {
+            "name": "RuleDocument"
+          }
+        }
+      }
+    },
+    {
+      "name": "initialize_governance",
+      "docs": [
+        "Initialize governance system"
+      ],
+      "discriminator": [
+        171,
+        87,
+        101,
+        237,
+        27,
+        107,
+        201,
+        57
+      ],
+      "accounts": [
+        {
+          "name": "governance_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "committee_token_mint",
+          "docs": [
+            "Committee token mint"
+          ]
+        },
+        {
+          "name": "usdc_token_mint",
+          "docs": [
+            "USDC token mint (for proposal deposits)"
+          ]
+        },
+        {
+          "name": "authority",
+          "docs": [
+            "System administrator"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "proposal_deposit",
+          "type": "u64"
+        },
+        {
+          "name": "voting_period",
+          "type": "u64"
+        },
+        {
+          "name": "participation_threshold",
+          "type": "u16"
+        },
+        {
+          "name": "approval_threshold",
+          "type": "u16"
+        },
+        {
+          "name": "veto_threshold",
+          "type": "u16"
+        },
+        {
+          "name": "fee_rate",
+          "type": "u16"
+        },
+        {
+          "name": "test_mode",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "initialize_token_vault",
+      "docs": [
+        "Initialize governance system token vault"
+      ],
+      "discriminator": [
+        64,
+        202,
+        113,
+        205,
+        22,
+        210,
+        178,
+        225
+      ],
+      "accounts": [
+        {
+          "name": "token_vault",
+          "docs": [
+            "Token vault account (PDA)"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101,
+                  95,
+                  116,
+                  111,
+                  107,
+                  101,
+                  110,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint",
+          "docs": [
+            "Token mint"
+          ]
+        },
+        {
+          "name": "governance_authority",
+          "docs": [
+            "Governance authority (PDA)"
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "payer",
+          "docs": [
+            "Payer account"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "docs": [
+            "System program"
+          ],
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "token_program",
+          "docs": [
+            "Token program"
+          ],
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "rent",
+          "docs": [
+            "Rent sysvar"
+          ],
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "remove_committee_member",
+      "docs": [
+        "Remove committee member"
+      ],
+      "discriminator": [
+        4,
+        79,
+        200,
+        47,
+        204,
+        77,
+        136,
+        71
+      ],
+      "accounts": [
+        {
+          "name": "governance_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "docs": [
+            "Only administrator can remove members"
+          ],
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "member",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "remove_rule_document",
+      "docs": [
+        "Remove rule document"
+      ],
+      "discriminator": [
+        210,
+        148,
+        126,
+        196,
+        92,
+        240,
+        205,
+        61
+      ],
+      "accounts": [
+        {
+          "name": "rule_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  117,
+                  108,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "governance_config",
+          "docs": [
+            "Governance configuration account for permission verification"
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "docs": [
+            "Only administrator can remove rule documents"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "document_index",
+          "type": "u32"
+        }
+      ]
+    },
+    {
+      "name": "update_governance_config",
+      "docs": [
+        "Update governance configuration"
+      ],
+      "discriminator": [
+        140,
+        45,
+        181,
+        17,
+        77,
+        67,
+        157,
+        248
+      ],
+      "accounts": [
+        {
+          "name": "governance_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "docs": [
+            "Only administrator can update configuration"
+          ],
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "config_update",
+          "type": {
+            "defined": {
+              "name": "GovernanceConfigUpdate"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_rule_document",
+      "docs": [
+        "Update rule document"
+      ],
+      "discriminator": [
+        149,
+        101,
+        178,
+        100,
+        99,
+        26,
+        62,
+        64
+      ],
+      "accounts": [
+        {
+          "name": "rule_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  117,
+                  108,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "governance_config",
+          "docs": [
+            "Governance configuration account for permission verification"
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "docs": [
+            "Only administrator can update rule documents"
+          ],
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "document_index",
+          "type": "u32"
+        },
+        {
+          "name": "new_url",
+          "type": {
+            "option": "string"
+          }
+        },
+        {
+          "name": "new_hash",
+          "type": {
+            "option": "string"
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_total_voting_power",
+      "docs": [
+        "Update total voting power"
+      ],
+      "discriminator": [
+        223,
+        131,
+        178,
+        127,
+        48,
+        141,
+        160,
+        48
+      ],
+      "accounts": [
+        {
+          "name": "governance_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "docs": [
+            "Only administrator can update"
+          ],
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "new_total_voting_power",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "verify_rule_document",
+      "docs": [
+        "Verify rule document hash"
+      ],
+      "discriminator": [
+        190,
+        225,
+        184,
+        149,
+        93,
+        131,
+        121,
+        108
+      ],
+      "accounts": [
+        {
+          "name": "rule_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  117,
+                  108,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "document_index",
+          "type": "u32"
+        },
+        {
+          "name": "expected_hash",
+          "type": "string"
+        }
+      ],
+      "returns": "bool"
+    }
+  ],
+  "accounts": [
+    {
+      "name": "GovernanceConfig",
+      "discriminator": [
+        81,
+        63,
+        124,
+        107,
+        210,
+        100,
+        145,
+        70
+      ]
+    },
+    {
+      "name": "Proposal",
+      "discriminator": [
+        26,
+        94,
+        189,
+        187,
+        116,
+        136,
+        53,
+        33
+      ]
+    },
+    {
+      "name": "RuleRegistry",
+      "discriminator": [
+        66,
+        237,
+        5,
+        117,
+        215,
+        77,
+        21,
+        169
+      ]
+    },
+    {
+      "name": "Vote",
+      "discriminator": [
+        96,
+        91,
+        104,
+        57,
+        145,
+        35,
+        172,
+        155
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "GovernanceNotInitialized",
+      "msg": "Governance system not initialized"
+    },
+    {
+      "code": 6001,
+      "name": "GovernanceAlreadyInitialized",
+      "msg": "Governance system already initialized"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidAuthority",
+      "msg": "Invalid authority"
+    },
+    {
+      "code": 6003,
+      "name": "Unauthorized",
+      "msg": "Unauthorized operation"
+    },
+    {
+      "code": 6004,
+      "name": "InvalidThreshold",
+      "msg": "Invalid threshold value"
+    },
+    {
+      "code": 6005,
+      "name": "InvalidFeeRate",
+      "msg": "Invalid fee rate"
+    },
+    {
+      "code": 6006,
+      "name": "InvalidVotingPeriod",
+      "msg": "Invalid voting period"
+    },
+    {
+      "code": 6007,
+      "name": "MathOverflow",
+      "msg": "Math overflow"
+    },
+    {
+      "code": 6008,
+      "name": "ProposalNotFound",
+      "msg": "Proposal not found"
+    },
+    {
+      "code": 6009,
+      "name": "InvalidProposalType",
+      "msg": "Invalid proposal type"
+    },
+    {
+      "code": 6010,
+      "name": "ProposalNotActive",
+      "msg": "Proposal not active"
+    },
+    {
+      "code": 6011,
+      "name": "ProposalNotExecutable",
+      "msg": "Proposal not executable"
+    },
+    {
+      "code": 6012,
+      "name": "VotingPeriodEnded",
+      "msg": "Voting period ended"
+    },
+    {
+      "code": 6013,
+      "name": "VotingPeriodNotEnded",
+      "msg": "Voting period not ended"
+    },
+    {
+      "code": 6014,
+      "name": "InvalidProposalTitleLength",
+      "msg": "Invalid proposal title length"
+    },
+    {
+      "code": 6015,
+      "name": "InvalidProposalDescriptionLength",
+      "msg": "Invalid proposal description length"
+    },
+    {
+      "code": 6016,
+      "name": "InsufficientProposalDeposit",
+      "msg": "Insufficient proposal deposit"
+    },
+    {
+      "code": 6017,
+      "name": "ProposalNotFinalized",
+      "msg": "Proposal not finalized"
+    },
+    {
+      "code": 6018,
+      "name": "ProposalNotVetoed",
+      "msg": "Proposal not vetoed"
+    },
+    {
+      "code": 6019,
+      "name": "AlreadyVoted",
+      "msg": "Already voted"
+    },
+    {
+      "code": 6020,
+      "name": "VoteNotFound",
+      "msg": "Vote not found"
+    },
+    {
+      "code": 6021,
+      "name": "VoteAlreadyRevoked",
+      "msg": "Vote already revoked"
+    },
+    {
+      "code": 6022,
+      "name": "InsufficientVotingPower",
+      "msg": "Insufficient voting power"
+    },
+    {
+      "code": 6023,
+      "name": "InvalidVoteType",
+      "msg": "Invalid vote type"
+    },
+    {
+      "code": 6024,
+      "name": "CannotRevokeVote",
+      "msg": "Cannot revoke vote"
+    },
+    {
+      "code": 6025,
+      "name": "CommitteeFull",
+      "msg": "Committee is full"
+    },
+    {
+      "code": 6026,
+      "name": "MemberAlreadyExists",
+      "msg": "Member already exists"
+    },
+    {
+      "code": 6027,
+      "name": "MemberNotFound",
+      "msg": "Member not found"
+    },
+    {
+      "code": 6028,
+      "name": "NotCommitteeMember",
+      "msg": "Not a committee member"
+    },
+    {
+      "code": 6029,
+      "name": "RuleRegistryNotFound",
+      "msg": "Rule registry not found"
+    },
+    {
+      "code": 6030,
+      "name": "RuleDocumentNotFound",
+      "msg": "Rule document not found"
+    },
+    {
+      "code": 6031,
+      "name": "DuplicateRuleDocument",
+      "msg": "Duplicate rule document"
+    },
+    {
+      "code": 6032,
+      "name": "TooManyRuleDocuments",
+      "msg": "Too many rule documents"
+    },
+    {
+      "code": 6033,
+      "name": "InvalidCategoryLength",
+      "msg": "Invalid category length"
+    },
+    {
+      "code": 6034,
+      "name": "InvalidTitleLength",
+      "msg": "Invalid title length"
+    },
+    {
+      "code": 6035,
+      "name": "InvalidUrlLength",
+      "msg": "Invalid URL length"
+    },
+    {
+      "code": 6036,
+      "name": "InvalidHashLength",
+      "msg": "Invalid hash length"
+    },
+    {
+      "code": 6037,
+      "name": "InvalidUrlFormat",
+      "msg": "Invalid URL format"
+    },
+    {
+      "code": 6038,
+      "name": "InvalidHashFormat",
+      "msg": "Invalid hash format"
+    },
+    {
+      "code": 6039,
+      "name": "InvalidMerchantAddress",
+      "msg": "Invalid merchant address"
+    },
+    {
+      "code": 6040,
+      "name": "ProductNotFound",
+      "msg": "Product not found"
+    },
+    {
+      "code": 6041,
+      "name": "OrderNotFound",
+      "msg": "Order not found"
+    },
+    {
+      "code": 6042,
+      "name": "InvalidViolationType",
+      "msg": "Invalid violation type"
+    },
+    {
+      "code": 6043,
+      "name": "TooManyEvidenceUrls",
+      "msg": "Too many evidence URLs"
+    },
+    {
+      "code": 6044,
+      "name": "InvalidSlashAmount",
+      "msg": "Invalid slash amount"
+    },
+    {
+      "code": 6045,
+      "name": "InvalidDisputeParties",
+      "msg": "Invalid dispute parties"
+    },
+    {
+      "code": 6046,
+      "name": "NotAuthorizedForDispute",
+      "msg": "Not authorized for dispute"
+    },
+    {
+      "code": 6047,
+      "name": "InvalidDisputeType",
+      "msg": "Invalid dispute type"
+    },
+    {
+      "code": 6048,
+      "name": "InvalidResolutionRequest",
+      "msg": "Invalid resolution request"
+    },
+    {
+      "code": 6049,
+      "name": "OrderNotInDispute",
+      "msg": "Order not in dispute"
+    },
+    {
+      "code": 6050,
+      "name": "InvalidTokenMint",
+      "msg": "Invalid token mint"
+    },
+    {
+      "code": 6051,
+      "name": "InsufficientTokenBalance",
+      "msg": "Insufficient token balance"
+    },
+    {
+      "code": 6052,
+      "name": "TokenTransferFailed",
+      "msg": "Token transfer failed"
+    },
+    {
+      "code": 6053,
+      "name": "InvalidTokenAccount",
+      "msg": "Invalid token account"
+    },
+    {
+      "code": 6054,
+      "name": "ArithmeticOverflow",
+      "msg": "Arithmetic overflow"
+    },
+    {
+      "code": 6055,
+      "name": "ArithmeticUnderflow",
+      "msg": "Arithmetic underflow"
+    },
+    {
+      "code": 6056,
+      "name": "DivisionByZero",
+      "msg": "Division by zero"
+    },
+    {
+      "code": 6057,
+      "name": "InvalidTimestamp",
+      "msg": "Invalid timestamp"
+    },
+    {
+      "code": 6058,
+      "name": "DeadlineExceeded",
+      "msg": "Deadline exceeded"
+    },
+    {
+      "code": 6059,
+      "name": "TooEarly",
+      "msg": "Too early"
+    },
+    {
+      "code": 6060,
+      "name": "InvalidAccountOwner",
+      "msg": "Invalid account owner"
+    },
+    {
+      "code": 6061,
+      "name": "InvalidAccountData",
+      "msg": "Invalid account data"
+    },
+    {
+      "code": 6062,
+      "name": "AccountNotInitialized",
+      "msg": "Account not initialized"
+    },
+    {
+      "code": 6063,
+      "name": "AccountAlreadyInitialized",
+      "msg": "Account already initialized"
+    },
+    {
+      "code": 6064,
+      "name": "InvalidPda",
+      "msg": "Invalid PDA"
+    },
+    {
+      "code": 6065,
+      "name": "InvalidAccountSeeds",
+      "msg": "Invalid account seeds"
+    },
+    {
+      "code": 6066,
+      "name": "ExecutionFailed",
+      "msg": "Execution failed"
+    },
+    {
+      "code": 6067,
+      "name": "InvalidExecutionData",
+      "msg": "Invalid execution data"
+    },
+    {
+      "code": 6068,
+      "name": "CpiCallFailed",
+      "msg": "CPI call failed"
+    },
+    {
+      "code": 6069,
+      "name": "InvalidInput",
+      "msg": "Invalid input"
+    },
+    {
+      "code": 6070,
+      "name": "OperationNotAllowed",
+      "msg": "Operation not allowed"
+    },
+    {
+      "code": 6071,
+      "name": "FeatureNotImplemented",
+      "msg": "Feature not implemented"
+    }
+  ],
+  "types": [
+    {
+      "name": "ArbitrationDecision",
+      "docs": [
+        "Arbitration decision"
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "RefundUser"
+          },
+          {
+            "name": "SupportMerchant"
+          },
+          {
+            "name": "PartialRefund",
+            "fields": [
+              "u64"
+            ]
+          },
+          {
+            "name": "RequireOfflineResolution"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ConfigUpdateData",
+      "docs": [
+        "Configuration update data"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "config_update",
+            "docs": [
+              "Configuration update parameters"
+            ],
+            "type": {
+              "defined": {
+                "name": "GovernanceConfigUpdate"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "DisputeProposalData",
+      "docs": [
+        "Trade dispute arbitration proposal data"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user_address",
+            "docs": [
+              "User address"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "merchant_address",
+            "docs": [
+              "Merchant address"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "order_address",
+            "docs": [
+              "Order address"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "dispute_type",
+            "docs": [
+              "Dispute type"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "evidence_urls",
+            "docs": [
+              "Evidence file URL list"
+            ],
+            "type": {
+              "vec": "string"
+            }
+          },
+          {
+            "name": "requested_resolution",
+            "docs": [
+              "Requested resolution"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "arbitration_decision",
+            "docs": [
+              "Arbitration decision (filled after voting)"
+            ],
+            "type": {
+              "option": {
+                "defined": {
+                  "name": "ArbitrationDecision"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ExecutionData",
+      "docs": [
+        "Execution data"
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Slash",
+            "fields": [
+              {
+                "defined": {
+                  "name": "SlashProposalData"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Dispute",
+            "fields": [
+              {
+                "defined": {
+                  "name": "DisputeProposalData"
+                }
+              }
+            ]
+          },
+          {
+            "name": "RuleUpdate",
+            "fields": [
+              {
+                "defined": {
+                  "name": "RuleUpdateData"
+                }
+              }
+            ]
+          },
+          {
+            "name": "ConfigUpdate",
+            "fields": [
+              {
+                "defined": {
+                  "name": "ConfigUpdateData"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "GovernanceConfig",
+      "docs": [
+        "Governance system configuration account"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "docs": [
+              "Administrator address"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "committee_token_mint",
+            "docs": [
+              "Committee token mint address (fixed to specified SPL Token)"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "committee_members",
+            "docs": [
+              "Committee member address array (maximum 10 members)"
+            ],
+            "type": {
+              "array": [
+                {
+                  "option": "pubkey"
+                },
+                10
+              ]
+            }
+          },
+          {
+            "name": "committee_member_count",
+            "docs": [
+              "Committee member count"
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "proposal_deposit",
+            "docs": [
+              "Proposal deposit amount (100 USDC)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "voting_period",
+            "docs": [
+              "Voting period (14 days, in seconds)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "participation_threshold",
+            "docs": [
+              "Participation threshold requirement (40% = 4000 basis points)"
+            ],
+            "type": "u16"
+          },
+          {
+            "name": "approval_threshold",
+            "docs": [
+              "Approval threshold requirement (50% = 5000 basis points)"
+            ],
+            "type": "u16"
+          },
+          {
+            "name": "veto_threshold",
+            "docs": [
+              "Veto threshold (30% = 3000 basis points)"
+            ],
+            "type": "u16"
+          },
+          {
+            "name": "fee_rate",
+            "docs": [
+              "Committee fee rate (10% = 1000 basis points)"
+            ],
+            "type": "u16"
+          },
+          {
+            "name": "total_voting_power",
+            "docs": [
+              "Total voting power"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "proposal_counter",
+            "docs": [
+              "Proposal counter"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "created_at",
+            "docs": [
+              "Creation time"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "updated_at",
+            "docs": [
+              "Last update time"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "test_mode",
+            "docs": [
+              "Test mode flag"
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "GovernanceConfigUpdate",
+      "docs": [
+        "Governance configuration update parameters"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "proposal_deposit",
+            "type": {
+              "option": "u64"
+            }
+          },
+          {
+            "name": "voting_period",
+            "type": {
+              "option": "u64"
+            }
+          },
+          {
+            "name": "participation_threshold",
+            "type": {
+              "option": "u16"
+            }
+          },
+          {
+            "name": "approval_threshold",
+            "type": {
+              "option": "u16"
+            }
+          },
+          {
+            "name": "veto_threshold",
+            "type": {
+              "option": "u16"
+            }
+          },
+          {
+            "name": "fee_rate",
+            "type": {
+              "option": "u16"
+            }
+          },
+          {
+            "name": "test_mode",
+            "type": {
+              "option": "bool"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Proposal",
+      "docs": [
+        "Proposal account"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "docs": [
+              "Proposal ID"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "proposer",
+            "docs": [
+              "Proposal proposer"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "proposal_type",
+            "docs": [
+              "Proposal type"
+            ],
+            "type": {
+              "defined": {
+                "name": "ProposalType"
+              }
+            }
+          },
+          {
+            "name": "title",
+            "docs": [
+              "Proposal title"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "docs": [
+              "Proposal description"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "deposit_amount",
+            "docs": [
+              "Deposit amount"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "created_at",
+            "docs": [
+              "Creation time"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "voting_start",
+            "docs": [
+              "Voting start time"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "voting_end",
+            "docs": [
+              "Voting end time"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "status",
+            "docs": [
+              "Proposal status"
+            ],
+            "type": {
+              "defined": {
+                "name": "ProposalStatus"
+              }
+            }
+          },
+          {
+            "name": "yes_votes",
+            "docs": [
+              "Yes votes"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "no_votes",
+            "docs": [
+              "No votes"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "abstain_votes",
+            "docs": [
+              "Abstain votes"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "veto_votes",
+            "docs": [
+              "Veto votes"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "total_votes",
+            "docs": [
+              "Total votes"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "execution_data",
+            "docs": [
+              "Execution data"
+            ],
+            "type": {
+              "option": {
+                "defined": {
+                  "name": "ExecutionData"
+                }
+              }
+            }
+          },
+          {
+            "name": "execution_result",
+            "docs": [
+              "Execution result"
+            ],
+            "type": {
+              "option": "string"
+            }
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProposalStatus",
+      "docs": [
+        "Proposal status"
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Pending"
+          },
+          {
+            "name": "Passed"
+          },
+          {
+            "name": "Rejected"
+          },
+          {
+            "name": "Vetoed"
+          },
+          {
+            "name": "Executed"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProposalType",
+      "docs": [
+        "Proposal type"
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "SlashMerchant"
+          },
+          {
+            "name": "DisputeArbitration"
+          },
+          {
+            "name": "RuleUpdate"
+          },
+          {
+            "name": "ConfigUpdate"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RuleDocument",
+      "docs": [
+        "Rule document structure"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "category",
+            "docs": [
+              "Rule category"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "docs": [
+              "Rule title"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "docs": [
+              "IPFS/Arweave URL"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "hash",
+            "docs": [
+              "Document hash"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "created_at",
+            "docs": [
+              "Creation time"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "updated_at",
+            "docs": [
+              "Update time"
+            ],
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RuleOperation",
+      "docs": [
+        "Rule operation type"
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Add"
+          },
+          {
+            "name": "Update"
+          },
+          {
+            "name": "Remove"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RuleRegistry",
+      "docs": [
+        "Rule registry account"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "docs": [
+              "Administrator address"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "rule_documents",
+            "docs": [
+              "Rule document list"
+            ],
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "RuleDocument"
+                }
+              }
+            }
+          },
+          {
+            "name": "last_updated",
+            "docs": [
+              "Last update time"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "version",
+            "docs": [
+              "Version"
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "created_at",
+            "docs": [
+              "Creation time"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RuleUpdateData",
+      "docs": [
+        "Rule update data"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "operation",
+            "docs": [
+              "Operation type"
+            ],
+            "type": {
+              "defined": {
+                "name": "RuleOperation"
+              }
+            }
+          },
+          {
+            "name": "document_index",
+            "docs": [
+              "Document index (for update/delete)"
+            ],
+            "type": {
+              "option": "u32"
+            }
+          },
+          {
+            "name": "document_data",
+            "docs": [
+              "New document data (for add/update)"
+            ],
+            "type": {
+              "option": {
+                "defined": {
+                  "name": "RuleDocument"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "SlashProposalData",
+      "docs": [
+        "Illegal product slash proposal data"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "merchant_address",
+            "docs": [
+              "Merchant address"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "product_address",
+            "docs": [
+              "Illegal product address (optional)"
+            ],
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "order_address",
+            "docs": [
+              "Illegal order address (optional)"
+            ],
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "violation_type",
+            "docs": [
+              "Violation type"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "evidence_urls",
+            "docs": [
+              "Evidence file URL list"
+            ],
+            "type": {
+              "vec": "string"
+            }
+          },
+          {
+            "name": "slash_amount",
+            "docs": [
+              "Slash amount"
+            ],
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Vote",
+      "docs": [
+        "Vote record account"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "proposal_id",
+            "docs": [
+              "Proposal ID"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "voter",
+            "docs": [
+              "Voter address"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "vote_type",
+            "docs": [
+              "Vote type"
+            ],
+            "type": {
+              "defined": {
+                "name": "VoteType"
+              }
+            }
+          },
+          {
+            "name": "timestamp",
+            "docs": [
+              "Vote time"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "token_balance_snapshot",
+            "docs": [
+              "Voter token balance snapshot"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "is_revoked",
+            "docs": [
+              "Whether revoked"
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "revoked_at",
+            "docs": [
+              "Revocation time"
+            ],
+            "type": {
+              "option": "i64"
+            }
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VoteType",
+      "docs": [
+        "Vote type"
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Yes"
+          },
+          {
+            "name": "No"
+          },
+          {
+            "name": "Abstain"
+          },
+          {
+            "name": "NoWithVeto"
+          }
+        ]
+      }
+    }
+  ],
+  "constants": [
+    {
+      "name": "SEED",
+      "type": "string",
+      "value": "\"anchor\""
+    }
+  ]
+}
